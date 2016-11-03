@@ -5,7 +5,16 @@ map <buffer> <leader><space> :w!<cr>:!python %<cr>
 set makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
 set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 
-setlocal omnifunc=RopeCompleteFunc
+"setlocal omnifunc=RopeCompleteFunc
+
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set textwidth=79
+set expandtab
+set autoindent
+set fileformat=unix
+
 
 "Python iMaps
 set cindent
