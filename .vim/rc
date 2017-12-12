@@ -1,42 +1,43 @@
+" vim: fdm=marker ts=2 sts=2 sw=2 fdl=0
+
+set encoding=utf-8
+scriptencoding utf-8
+
 if v:progname =~? "evim"
   finish
 endif
 
 set nocompatible
 
-" Packages -----------------------------
-set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim/
-
-if dein#load_state('~/.vim/bundle')
-  call dein#begin(expand('~/.vim/dein'))
-  call dein#add('Shougo/dein.vim')
-  call dein#add('tpope/vim-fugitive')
-  call dein#add('ludovicchabant/vim-lawrencium')
-  call dein#add('honza/vim-snippets')
-  call dein#add('sjbach/lusty')
-  call dein#add('sjl/gundo.vim.git')
-  call dein#add('ervandew/supertab')
-  call dein#add('Valloric/YouCompleteMe')
-  call dein#add('SirVer/ultisnips')
-  call dein#add('vim-scripts/indentpython.vim')
-  call dein#add('vim-scripts/Syntastic')
-  call dein#add('tenable/vim-nasl')
-"  call dein#add('Rykka/riv.vim')
-"  call dein#add('git://git.wincent.com/command-t.git')
-  call dein#add('rking/ag.vim')
-  call dein#add('kien/ctrlp.vim')
-  call dein#add('bling/vim-airline')
-  call dein#add('vim-scripts/peaksea')
-  call dein#add('airblade/vim-gitgutter')
-  call dein#add('chase/vim-ansible-yaml')
-  call dein#add('nvie/vim-flake8')
-  call dein#add('fisadev/vim-isort')
-  call dein#end()
-  call dein#save_state()
-endif
+" packages {{{
+call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-fugitive'
+Plug 'ludovicchabant/vim-lawrencium'
+Plug 'honza/vim-snippets'
+Plug 'sjbach/lusty'
+Plug 'sjl/gundo.vim'
+"Plug 'ervandew/supertab'
+Plug 'maralla/completor.vim'
+Plug 'SirVer/ultisnips'
+Plug 'vim-scripts/indentpython.vim'
+"Plug 'vim-scripts/Syntastic'
+Plug 'maralla/validator.vim'
+Plug 'tenable/vim-nasl'
+"Plug 'Rykka/riv.vim'
+"Plug 'git://git.wincent.com/command-t.git'
+Plug 'rking/ag.vim'
+Plug 'kien/ctrlp.vim'
+Plug 'bling/vim-airline'
+Plug 'vim-scripts/peaksea'
+Plug 'airblade/vim-gitgutter'
+Plug 'chase/vim-ansible-yaml'
+Plug 'nvie/vim-flake8'
+Plug 'fisadev/vim-isort'
+call plug#end()
+" }}}
 
 
-" 88888888888888888888888888888888888888888888888888
+" completion {{{
 function! g:UltiSnips_Complete()
   call UltiSnips#ExpandSnippet()
   if g:ulti_expand_res == 0
@@ -80,6 +81,10 @@ let g:ycm_python_binary_path = '/home/msuszko/ralph/env/bin/python3.6'
 
 " END YouCompleteMe
 " Required:
+
+" }}}
+
+
 filetype plugin indent on
 
 
@@ -89,7 +94,8 @@ let g:airline#extensions#tabline#enabled = 1
 " The Silver Searcher
 if executable('ag')
   " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
+  set grepprg=ag\ --nogroup\ --nocolor\ --column
+  set grepformat=%f:%l:%c:%m,%f:%l:%m
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
@@ -269,6 +275,9 @@ if &t_Co > 2 || has("gui_running")
     syntax on
     set nohlsearch
     colorscheme peaksea
+endif
+if &term == "screen"
+  set t_Co=256
 endif
 
 cmap w!! w !sudo tee % >/dev/null
