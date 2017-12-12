@@ -4,46 +4,37 @@ endif
 
 set nocompatible
 
-"NeoBundle Scripts-----------------------------
-if has('vim_starting')
+" Packages -----------------------------
+set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim/
 
-  " Required:
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
+if dein#load_state('~/.vim/bundle')
+  call dein#begin(expand('~/.vim/dein'))
+  call dein#add('Shougo/dein.vim')
+  call dein#add('tpope/vim-fugitive')
+  call dein#add('ludovicchabant/vim-lawrencium')
+  call dein#add('honza/vim-snippets')
+  call dein#add('sjbach/lusty')
+  call dein#add('sjl/gundo.vim.git')
+  call dein#add('ervandew/supertab')
+  call dein#add('Valloric/YouCompleteMe')
+  call dein#add('SirVer/ultisnips')
+  call dein#add('vim-scripts/indentpython.vim')
+  call dein#add('vim-scripts/Syntastic')
+  call dein#add('tenable/vim-nasl')
+"  call dein#add('Rykka/riv.vim')
+"  call dein#add('git://git.wincent.com/command-t.git')
+  call dein#add('rking/ag.vim')
+  call dein#add('kien/ctrlp.vim')
+  call dein#add('bling/vim-airline')
+  call dein#add('vim-scripts/peaksea')
+  call dein#add('airblade/vim-gitgutter')
+  call dein#add('chase/vim-ansible-yaml')
+  call dein#add('nvie/vim-flake8')
+  call dein#add('fisadev/vim-isort')
+  call dein#end()
+  call dein#save_state()
 endif
 
-" Required:
-call neobundle#begin(expand('~/.vim/bundle'))
-
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-" Add or remove your Bundles here:
-" NeoBundle 'gmarik/vundle'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'ludovicchabant/vim-lawrencium'
-NeoBundle 'honza/vim-snippets'
-NeoBundle 'sjbach/lusty'
-NeoBundle 'sjl/gundo.vim.git'
-" NeoBundle 'davidhalter/jedi-vim'
-NeoBundle 'ervandew/supertab'
-NeoBundle 'Valloric/YouCompleteMe'
-NeoBundle 'SirVer/ultisnips'
-NeoBundle 'vim-scripts/indentpython.vim'
-NeoBundle 'Syntastic'
-"NeoBundle 'Rykka/riv.vim'
-"NeoBundle 'git://git.wincent.com/command-t.git'
-NeoBundle 'rking/ag.vim'
-NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'bling/vim-airline'
-NeoBundle 'peaksea'
-NeoBundle 'vim-gitgutter'
-NeoBundle 'chase/vim-ansible-yaml'
-NeoBundle 'nvie/vim-flake8'
-NeoBundle 'fisadev/vim-isort'
-
-" Required:
-call neobundle#end()
 
 " 88888888888888888888888888888888888888888888888888
 function! g:UltiSnips_Complete()
@@ -85,16 +76,12 @@ au InsertEnter * exec "inoremap <silent> " .     g:UltiSnipsJumpBackwardTrigger 
 let g:gundo_prefer_python3 = 1
 " YouCompleteMe
 let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_python_binary_path = '/home/msuszko/ralph/env/bin/python3.5'
+let g:ycm_python_binary_path = '/home/msuszko/ralph/env/bin/python3.6'
 
 " END YouCompleteMe
 " Required:
 filetype plugin indent on
 
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
-"End NeoBundle Scripts-------------------------
 
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -207,6 +194,7 @@ set showmode
 set nostartofline
 set notextmode
 set textwidth=78
+" set colorcolumn=78
 set ttyfast
 set ttyscroll=0
 set visualbell
@@ -227,6 +215,14 @@ autocmd FileType html,js,xhtml,xml,mako,jinja,htmljinja setlocal expandtab shift
 autocmd BufNewFile,BufRead *.xhtml setf xhtml
 autocmd BufNewFile,BufRead *.mako setf mako
 autocmd BufNewFile,BufRead *.jinja setf jinja
+" Nessus:
+let nasl_space_errors = 1
+autocmd BufNewFile,BufRead *.audit set syntax=xml
+autocmd BufNewFile,BufRead *.nasl set filetype=nasl
+autocmd BufNewFile,BufRead *.inc set filetype=nasl
+autocmd BufNewFile,BufRead *.inc set indentexpr=
+autocmd FileType nasl setlocal shiftwidth=2 tabstop=2 expandtab softtabstop=2
+
 let html_no_rendering=1
 let g:closetag_default_xml=1
 autocmd FileType html,mako let b:closetag_html_style=1
