@@ -1,51 +1,43 @@
+" vim: fdm=marker ts=2 sts=2 sw=2 fdl=0
+
+set encoding=utf-8
+scriptencoding utf-8
+
 if v:progname =~? "evim"
   finish
 endif
 
 set nocompatible
 
-"NeoBundle Scripts-----------------------------
-if has('vim_starting')
+" packages {{{
+call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-fugitive'
+Plug 'ludovicchabant/vim-lawrencium'
+Plug 'honza/vim-snippets'
+Plug 'sjbach/lusty'
+Plug 'sjl/gundo.vim'
+"Plug 'ervandew/supertab'
+Plug 'maralla/completor.vim'
+Plug 'SirVer/ultisnips'
+Plug 'vim-scripts/indentpython.vim'
+"Plug 'vim-scripts/Syntastic'
+Plug 'maralla/validator.vim'
+Plug 'tenable/vim-nasl'
+"Plug 'Rykka/riv.vim'
+"Plug 'git://git.wincent.com/command-t.git'
+Plug 'rking/ag.vim'
+Plug 'kien/ctrlp.vim'
+Plug 'bling/vim-airline'
+Plug 'vim-scripts/peaksea'
+Plug 'airblade/vim-gitgutter'
+Plug 'chase/vim-ansible-yaml'
+Plug 'nvie/vim-flake8'
+Plug 'fisadev/vim-isort'
+call plug#end()
+" }}}
 
-  " Required:
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
 
-" Required:
-call neobundle#begin(expand('~/.vim/bundle'))
-
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-" Add or remove your Bundles here:
-" NeoBundle 'gmarik/vundle'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'ludovicchabant/vim-lawrencium'
-NeoBundle 'honza/vim-snippets'
-NeoBundle 'sjbach/lusty'
-NeoBundle 'sjl/gundo.vim.git'
-" NeoBundle 'davidhalter/jedi-vim'
-NeoBundle 'ervandew/supertab'
-NeoBundle 'Valloric/YouCompleteMe'
-NeoBundle 'SirVer/ultisnips'
-NeoBundle 'vim-scripts/indentpython.vim'
-NeoBundle 'Syntastic'
-"NeoBundle 'Rykka/riv.vim'
-"NeoBundle 'git://git.wincent.com/command-t.git'
-NeoBundle 'rking/ag.vim'
-NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'bling/vim-airline'
-NeoBundle 'peaksea'
-NeoBundle 'vim-gitgutter'
-NeoBundle 'chase/vim-ansible-yaml'
-NeoBundle 'nvie/vim-flake8'
-NeoBundle 'fisadev/vim-isort'
-
-" Required:
-call neobundle#end()
-
-" 88888888888888888888888888888888888888888888888888
+" completion {{{
 function! g:UltiSnips_Complete()
   call UltiSnips#ExpandSnippet()
   if g:ulti_expand_res == 0
@@ -85,16 +77,16 @@ au InsertEnter * exec "inoremap <silent> " .     g:UltiSnipsJumpBackwardTrigger 
 let g:gundo_prefer_python3 = 1
 " YouCompleteMe
 let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_python_binary_path = '/home/msuszko/ralph/env/bin/python3.5'
+let g:ycm_python_binary_path = '/home/msuszko/ralph/env/bin/python3.6'
 
 " END YouCompleteMe
 " Required:
+
+" }}}
+
+
 filetype plugin indent on
 
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
-"End NeoBundle Scripts-------------------------
 
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -102,7 +94,8 @@ let g:airline#extensions#tabline#enabled = 1
 " The Silver Searcher
 if executable('ag')
   " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
+  set grepprg=ag\ --nogroup\ --nocolor\ --column
+  set grepformat=%f:%l:%c:%m,%f:%l:%m
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
@@ -207,6 +200,7 @@ set showmode
 set nostartofline
 set notextmode
 set textwidth=78
+" set colorcolumn=78
 set ttyfast
 set ttyscroll=0
 set visualbell
@@ -227,6 +221,14 @@ autocmd FileType html,js,xhtml,xml,mako,jinja,htmljinja setlocal expandtab shift
 autocmd BufNewFile,BufRead *.xhtml setf xhtml
 autocmd BufNewFile,BufRead *.mako setf mako
 autocmd BufNewFile,BufRead *.jinja setf jinja
+" Nessus:
+let nasl_space_errors = 1
+autocmd BufNewFile,BufRead *.audit set syntax=xml
+autocmd BufNewFile,BufRead *.nasl set filetype=nasl
+autocmd BufNewFile,BufRead *.inc set filetype=nasl
+autocmd BufNewFile,BufRead *.inc set indentexpr=
+autocmd FileType nasl setlocal shiftwidth=2 tabstop=2 expandtab softtabstop=2
+
 let html_no_rendering=1
 let g:closetag_default_xml=1
 autocmd FileType html,mako let b:closetag_html_style=1
@@ -273,6 +275,9 @@ if &t_Co > 2 || has("gui_running")
     syntax on
     set nohlsearch
     colorscheme peaksea
+endif
+if &term == "screen"
+  set t_Co=256
 endif
 
 cmap w!! w !sudo tee % >/dev/null
