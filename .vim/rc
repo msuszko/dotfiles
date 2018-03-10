@@ -21,7 +21,8 @@ Plug 'maralla/completor.vim'
 Plug 'SirVer/ultisnips'
 Plug 'vim-scripts/indentpython.vim'
 "Plug 'vim-scripts/Syntastic'
-Plug 'maralla/validator.vim'
+"Plug 'maralla/validator.vim'
+Plug 'w0rp/ale'
 Plug 'tenable/vim-nasl'
 "Plug 'Rykka/riv.vim'
 "Plug 'git://git.wincent.com/command-t.git'
@@ -87,6 +88,12 @@ let g:ycm_python_binary_path = '/home/msuszko/ralph/env/bin/python3.6'
 
 filetype plugin indent on
 
+let g:ale_sign_error = '☢'
+let g:ale_sign_warning = '☹'
+" highlight clear ALEErrorSign
+highlight clear ALEWarningSign
+let g:airline#extensions#ale#enabled = 1
+let g:ale_linters = {'python': ['flake8']}
 
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
