@@ -1,13 +1,113 @@
 " vim: fdm=marker ts=2 sts=2 sw=2 fdl=0
 
-set encoding=utf-8
-scriptencoding utf-8
+" General options{{{
 
 if v:progname =~? "evim"
   finish
 endif
 
 set nocompatible
+filetype plugin indent on
+
+set encoding=utf-8
+
+" Whitespaces and tabs
+set tabstop=8 softtabstop=2 shiftwidth=2 expandtab
+" Use shiftwidth for tab with at the BOL, and tabstop in other places
+" Otherwise, tabstop is used always. Shiftwidth is only used for >>
+set smarttab
+
+" Let buffer be switched to another one without requiring to save it first
+set hidden
+
+" Timeout settings
+" Wait forever until I recall mapping
+" Don't wait to much for keycodes send by terminal, so there's no delay on <ESC>
+set notimeout
+set ttimeout
+set timeoutlen=2000
+set ttimeoutlen=30
+
+" Zsh like <Tab> completion in command mode
+set wildmenu
+set wildmode=full
+
+" Set <leader> key to <Space>
+nnoremap <Space> <Nop>
+let mapleader=" "
+let maplocalleader=","
+
+" <Backspace> in Insert mode
+set backspace=indent,eol,start
+
+" Keep some characters visible during horizontal scroll
+" Recenter cursor during horizontal scroll
+set sidescroll=0
+set sidescrolloff=3
+
+" Minimal number of screen lines to keep above and below the cursor, expect for bol and eol
+set scrolloff=2
+
+" Status line
+" Always show status line, even when 1 window is opened
+set laststatus=2
+
+" Highlight the line with a cursor
+set cursorline
+
+" Show cursorline in current window and not in insert mode
+augroup aug_cursor_line
+  au!
+  au InsertEnter * setlocal nocursorline
+  au InsertLeave * setlocal cursorline
+augroup END
+
+" Disable reading vim variables & options from special comments within file header or footer
+set modeline
+set modelines=1
+
+" Display uncompleted commands in the status line
+set showcmd
+
+" Show ruler
+set ruler
+
+" Use /g flag for substitute command by default
+set gdefault
+
+" Tweak autocompletion behavior for <C-n>/<C-p> in insert mode
+" Default is ".,w,b,u,t,i" without "i", where:
+" . - scan current buffer. Same to invoking <C-x><C-n> individually
+" w - buffers in other windows
+" b - loaded buffers in buffer list
+" u - unloaded buffers in buffer list
+" t - tags. Same to invoking <C-x><C-]> individually
+" i - included files. We don't need this.
+" kspell, when spell check is active, use words from spellfiles
+set complete-=i
+set complete+=kspell
+
+" Do not insert first sugggestion
+set completeopt=menu,preview,noinsert
+
+" Add @@@ marks on the last column of last line if there is more text below
+set display=lastline
+
+" Auto indentation
+set autoindent
+set smartindent
+set pastetoggle=<F10>
+set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
+
+" Disable startup message
+set shortmess+=I
+
+" Conceal text and highlight with "Conceal" highlight group
+set conceallevel=2
+
+" }}}
+
+
 
 " packages {{{
 call plug#begin('~/.vim/plugged')
@@ -16,6 +116,7 @@ Plug 'ludovicchabant/vim-lawrencium'
 Plug 'honza/vim-snippets'
 Plug 'sjbach/lusty'
 Plug 'sjl/gundo.vim'
+Plug 'fatih/vim-go'
 "Plug 'ervandew/supertab'
 Plug 'maralla/completor.vim'
 Plug 'SirVer/ultisnips'
@@ -29,11 +130,16 @@ Plug 'tenable/vim-nasl'
 Plug 'rking/ag.vim'
 Plug 'kien/ctrlp.vim'
 Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/peaksea'
 Plug 'airblade/vim-gitgutter'
-Plug 'chase/vim-ansible-yaml'
+Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; ./generate.py' }
 Plug 'nvie/vim-flake8'
 Plug 'fisadev/vim-isort'
+Plug 'sheerun/vim-polyglot'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'junegunn/seoul256.vim'
+Plug 'jonathanfilip/vim-lucius'
 call plug#end()
 " }}}
 
@@ -86,13 +192,13 @@ let g:ycm_python_binary_path = '/home/msuszko/ralph/env/bin/python3.6'
 " }}}
 
 
-filetype plugin indent on
-
+let g:gitgutter_enabled = 1
 let g:ale_sign_error = '☢'
 let g:ale_sign_warning = '☹'
 " highlight clear ALEErrorSign
 highlight clear ALEWarningSign
 let g:airline#extensions#ale#enabled = 1
+let g:airline_theme='papercolor'
 let g:ale_linters = {'python': ['flake8']}
 
 let g:airline_powerline_fonts = 1
@@ -113,15 +219,17 @@ endif
 
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
-let mapleader = ","
 
 set nobackup
 set history=1000
 set undolevels=1000      " use many muchos levels of undo
-set viminfo=%,'500,\"1000,:1000,n~/.viminfo
+if has('nvim')
+  set viminfo=%,'500,\"1000,:1000,n~/.vim/nviminfo
+else
+  set viminfo=%,'500,\"1000,:1000,n~/.vim/viminfo
+endif
 set suffixes=.aux,.bak,.dvi,.gz,.idx,.log,.ps,.swp,.tar
 set wildignore=*.swp,*.bak,*.pyc,*.class
-set backspace=indent,eol,start
 
 " search
 set incsearch	  " do incremental searching
@@ -137,19 +245,10 @@ nmap Q gqap
 set background=light
 set hidden
 
-" indent
-set autoindent    " always set autoindenting on
-set copyindent    " copy the previous indentation on autoindenting
-set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
-set smarttab      " insert tabs on the start of a line according to
-                  "    shiftwidth, not tabstop
-set shiftwidth=2  " number of spaces to use for autoindenting
-set tabstop=2     " a tab is four spaces
 
 " display
 set showmatch
-set ruler		  " show the cursor position all the time
-set showcmd		  " display incomplete commands
+set showcmd       " display incomplete commands
 set visualbell    " don't beep
 set noerrorbells  " don't beep
 
@@ -157,8 +256,6 @@ nnoremap ; :
 set listchars=tab:>.,trail:.,extends:#,nbsp:.
 
 " pasting
-set nopaste
-set pastetoggle=<F10>
 nmap <leader>y "*y
 nmap <leader>Y "*yy
 nmap <leader>p "*p
@@ -190,26 +287,20 @@ nmap <silent> <leader>C :cclose<CR>
 nmap <silent> <leader>m :make<CR>
 nmap <silent> <leader>; :LustyJuggler<CR>
 nmap <silent> <leader>a :Ag<CR>
-nmap <silent> <leader>d  :YcmCompleter GoToDefinition<CR>
-nmap <silent> <leader>r  :YcmCompleter GoToReferences<CR>
+nmap <silent> <leader>d :YcmCompleter GoToDefinition<CR>
+nmap <silent> <leader>r :YcmCompleter GoToReferences<CR>
 
 
-set laststatus=2
 set magic
-set modeline
-set modelines=1
 set nonumber
 set report=0
 set ruler
 set shortmess=atI
-set showcmd
 set showmode
 set nostartofline
-set notextmode
 set textwidth=78
 " set colorcolumn=78
 set ttyfast
-set ttyscroll=0
 set visualbell
 set wildchar=<TAB>
 set wrapmargin=1
@@ -224,7 +315,7 @@ map <F2> :set nu!<CR>
 imap <F2> <C-O>:set nu!<CR>
 
 autocmd FileType text setlocal textwidth=78
-autocmd FileType html,js,xhtml,xml,mako,jinja,htmljinja setlocal expandtab shiftwidth=2 tabstop=8 softtabstop=2
+autocmd FileType xml setlocal noexpandtab tabstop=2
 autocmd BufNewFile,BufRead *.xhtml setf xhtml
 autocmd BufNewFile,BufRead *.mako setf mako
 autocmd BufNewFile,BufRead *.jinja setf jinja
@@ -234,7 +325,6 @@ autocmd BufNewFile,BufRead *.audit set syntax=xml
 autocmd BufNewFile,BufRead *.nasl set filetype=nasl
 autocmd BufNewFile,BufRead *.inc set filetype=nasl
 autocmd BufNewFile,BufRead *.inc set indentexpr=
-autocmd FileType nasl setlocal shiftwidth=2 tabstop=2 expandtab softtabstop=2
 
 let html_no_rendering=1
 let g:closetag_default_xml=1
@@ -281,7 +371,8 @@ if &t_Co > 2 || has("gui_running")
     set   t_Co=256
     syntax on
     set nohlsearch
-    colorscheme peaksea
+    "let g:seoul256_light_background = 250
+    colorscheme lucius
 endif
 if &term == "screen"
   set t_Co=256
