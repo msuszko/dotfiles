@@ -55,9 +55,9 @@
 
 [user]
     name = Michał Suszko
-    email = Michal.Suszko@partners.mbank.pl
+    email = michal.suszko@dry.pl
 
 [push]
     default = matching
 [gitreview]
-    username = zew_2_9603
+    username = dry
