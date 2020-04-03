@@ -68,15 +68,11 @@ xterm*|rxvt*)
 esac
 
 export EDITOR='vim'
-#export LC_ALL="pl_PL.ISO8859-2"
-#export LANG="pl_PL.ISO8859-2"
 export LC_ALL="pl_PL.UTF-8"
 export LANG="pl_PL.UTF-8"
 export RPROMPT="%~"
 export MAILDIR=${HOME}/Mail/inbox/
 export MAIL=$MAILDIR
-export NNTPSERVER=news
-#export LESSCHARSET=latin1
 export LESSCHARSET=utf-8
 export PAGER=less
 
@@ -96,6 +92,3 @@ compinit
 
 alias lsd='ls -d *(-/DN)'
 alias ag="ag --color-line-number '1;14' --color-path '1;34' --color-match '2;31'"
-
-[ -r TODO ] && ( echo "ToDo:"; cat TODO )
-
