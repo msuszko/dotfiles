@@ -117,16 +117,12 @@ Plug 'honza/vim-snippets'
 Plug 'sjbach/lusty'
 Plug 'sjl/gundo.vim'
 Plug 'fatih/vim-go'
-"Plug 'ervandew/supertab'
-Plug 'maralla/completor.vim'
+Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 Plug 'SirVer/ultisnips'
 Plug 'vim-scripts/indentpython.vim'
-"Plug 'vim-scripts/Syntastic'
-"Plug 'maralla/validator.vim'
 Plug 'w0rp/ale'
 Plug 'tenable/vim-nasl'
 "Plug 'Rykka/riv.vim'
-"Plug 'git://git.wincent.com/command-t.git'
 Plug 'rking/ag.vim'
 Plug 'kien/ctrlp.vim'
 Plug 'bling/vim-airline'
@@ -140,6 +136,8 @@ Plug 'sheerun/vim-polyglot'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'junegunn/seoul256.vim'
 Plug 'jonathanfilip/vim-lucius'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'duganchen/vim-soy'
 call plug#end()
 " }}}
 
@@ -316,6 +314,7 @@ imap <F2> <C-O>:set nu!<CR>
 
 autocmd FileType text setlocal textwidth=78
 autocmd FileType xml setlocal noexpandtab tabstop=2
+autocmd BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 autocmd BufNewFile,BufRead *.xhtml setf xhtml
 autocmd BufNewFile,BufRead *.mako setf mako
 autocmd BufNewFile,BufRead *.jinja setf jinja
