@@ -79,8 +79,7 @@ export PAGER=less
 bindkey -e
 bindkey "^U" vi-kill-line
 
-export PATH=$PATH:$HOME/bin:$HOME/local/bin
-export PYTHONPATH=$HOME/local/lib/python2.5/site-packages
+export PATH=$HOME/env/bin:$HOME/go/bin:$HOME/.cargo/bin:$HOME/local/bin:$PATH
 
 setopt AUTOLIST
 
@@ -92,3 +91,6 @@ compinit
 
 alias lsd='ls -d *(-/DN)'
 alias ag="ag --color-line-number '1;14' --color-path '1;34' --color-match '2;31'"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C terraform terraform
