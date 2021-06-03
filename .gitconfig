@@ -35,6 +35,8 @@
     # [default] space-before-tab: looks for spaces before tabs at the beginning of
     # a line
     whitespace = space-before-tab,tab-in-indent,trailing-space
+    quotepath = false
+    commitGraph = true
 [color]
     # Use colors in Git commands that are capable of colored output when
     # outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
@@ -60,5 +62,15 @@
 [push]
     default = matching
 [gitreview]
-    username = dry
-    branchauthor = email
+    username = msuszko
+    remote = origin
+[status]
+    submoduleSummary = true
+[gc]
+    writeCommitGraph = true
+[pull]
+    rebase = true
+[diff]
+    renameLimit = 3000
+[merge]
+    tool = nvimdiff

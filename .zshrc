@@ -47,7 +47,7 @@ e_esc=`print -Pn "\a"`
 
 case "${TERM}" in
 screen)
-    export PROMPT="%{${b_esc}$WINDOW %n@%m:%/${e_esc}%}%# "
+    export PROMPT="%{${b_esc}$WINDOW %n@%m:%/${e_esc}%}%m%# "
     preexec () {
         print -Pn "\e]0;$WINDOW %n@%m:%/: ";
         print -RPn "%60>...>${(V)1//\%/%%}";
@@ -55,7 +55,7 @@ screen)
     }
     ;;
 xterm*|rxvt*)
-    export PROMPT="%{${b_esc}%n@%m:%/${e_esc}%}%# "
+    export PROMPT="%{${b_esc}%n@%m:%/${e_esc}%}%m%# "
     preexec () {
         print -Pn "\e]0;%n@%m:%/: ";
         print -RPn "%60>...>${(V)1//\%/%%}";
@@ -67,6 +67,7 @@ xterm*|rxvt*)
    ;;
 esac
 
+export PROMPT='%F{blue}%m%f%# '
 export EDITOR='vim'
 export LC_ALL="pl_PL.UTF-8"
 export LANG="pl_PL.UTF-8"
@@ -79,7 +80,10 @@ export PAGER=less
 bindkey -e
 bindkey "^U" vi-kill-line
 
-export PATH=$HOME/env/bin:$HOME/go/bin:$HOME/.cargo/bin:$HOME/local/bin:$PATH
+export GOPATH=$HOME/go
+export PATH=$HOME/env/bin:$GOPATH/bin:$HOME/.cargo/bin:$HOME/local/bin:$PATH:$HOME/.krew/bin
+export FZF_DEFAULT_OPTS="--color=light"
+export XDG_CONFIG_HOME=$HOME/.config
 
 setopt AUTOLIST
 
@@ -91,6 +95,9 @@ compinit
 
 alias lsd='ls -d *(-/DN)'
 alias ag="ag --color-line-number '1;14' --color-path '1;34' --color-match '2;31'"
+alias k=kubectl
+complete -F __start_kubectl k
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C terraform terraform
+export VAULT_CLI_NO_COLOR=1
