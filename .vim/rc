@@ -117,7 +117,7 @@ Plug 'honza/vim-snippets'
 Plug 'sjbach/lusty'
 Plug 'sjl/gundo.vim'
 Plug 'fatih/vim-go'
-Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'SirVer/ultisnips'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'w0rp/ale'
