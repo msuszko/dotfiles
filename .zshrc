@@ -23,6 +23,12 @@ case `uname` in
     ;;
 'FreeBSD')
     ;;
+'Darwin')
+    ulimit -n 2048
+    alias mtr="sudo /usr/local/sbin/mtr"
+    test -e $HOME/.iterm2_shell_integration.zsh && source $HOME/.iterm2_shell_integration.zsh || true
+    FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+    ;;
 *)
     ;;
 esac
