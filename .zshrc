@@ -88,19 +88,21 @@ export XDG_CONFIG_HOME=$HOME/.config
 
 setopt AUTOLIST
 
-# Completion
-autoload -Uz compinit
-compinit
-
 # Aliases
 
 alias lsd='ls -d *(-/DN)'
 alias ag="ag --color-line-number '1;14' --color-path '1;34' --color-match '2;31'"
 alias k=kubectl
-complete -F __start_kubectl k
 alias vi=nvim
 alias vim=nvim
 
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C terraform terraform
 export VAULT_CLI_NO_COLOR=1
+
+source <("$HOME/.cargo/bin/starship" init zsh --print-full-init)
+# Completion
+autoload -Uz compinit
+autoload -U +X bashcompinit
+compinit
+bashcompinit
+complete -F __start_kubectl k
+complete -o nospace -C terraform terraform
