@@ -1,0 +1,11 @@
+\set QUIET 1
+\set admin_user michal_suszko
+\pset null '¤'
+\timing
+\x auto
+\set VERBOSITY verbose
+\set HISTSIZE 8000
+\set HISTFILE ~/.psql/history- :DBNAME
+\set HISTCONTROL ignoredups
+\set AUTOCOMMIT OFF
+\unset QUIET
