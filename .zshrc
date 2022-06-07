@@ -112,3 +112,5 @@ compinit
 bashcompinit
 complete -F __start_kubectl k
 complete -o nospace -C terraform terraform
+zstyle ':completion:*' menu select
+fpath+=~/.zfunc
