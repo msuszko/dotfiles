@@ -68,7 +68,7 @@ xterm*|rxvt*)
 esac
 
 export PROMPT='%F{blue}%m%f%# '
-export EDITOR='vim'
+export EDITOR='nvim'
 export LC_ALL="en_GB.UTF-8"
 export LANG="en_GB.UTF-8"
 export LC_CTYPE="pl_PL.UTF-8"
@@ -98,6 +98,8 @@ alias lsd='ls -d *(-/DN)'
 alias ag="ag --color-line-number '1;14' --color-path '1;34' --color-match '2;31'"
 alias k=kubectl
 complete -F __start_kubectl k
+alias vi=nvim
+alias vim=nvim
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C terraform terraform
