@@ -69,8 +69,9 @@ esac
 
 export PROMPT='%F{blue}%m%f%# '
 export EDITOR='vim'
-export LC_ALL="pl_PL.UTF-8"
-export LANG="pl_PL.UTF-8"
+export LC_ALL="en_GB.UTF-8"
+export LANG="en_GB.UTF-8"
+export LC_CTYPE="pl_PL.UTF-8"
 export RPROMPT="%~"
 export MAILDIR=${HOME}/Mail/inbox/
 export MAIL=$MAILDIR
