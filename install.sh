@@ -15,3 +15,4 @@ ln -sf $dotfiles_dir/.plsqlrc $HOME/.plsqlrc
 ln -sf $dotfiles_dir/.vim/scripts/python.vim $HOME/.vim/scripts/python.vim
 ln -sf $dotfiles_dir/.config/pudb/pudb.cfg $HOME/.config/pudb/pudb.cfg
 ln -sf $dotfiles_dir/.config/nvim/init.vim $HOME/.config/nvim/init.vim
+ln -sf $dotfiles_dir/.config/starship.toml $HOME/.config/starship.toml
