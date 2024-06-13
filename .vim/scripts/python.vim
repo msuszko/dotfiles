@@ -34,5 +34,3 @@ function! Python_Eval_VSplit() range
   execute ":pedit! " . dst
 endfunction
 vmap <F7> :call Python_Eval_VSplit()<cr>
-
-UltiSnipsAddFiletypes python
