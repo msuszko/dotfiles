@@ -5,6 +5,7 @@ dotfiles_dir=$HOME/git/dotfiles
 mkdir -p \
   $HOME/.config/nvim \
   $HOME/.config/pudb \
+  $HOME/.config/alacritty \
   ${GNUPGHOME:-$HOME/.gnupg} \
   $HOME/.vim/scripts
 ln -sf $dotfiles_dir/.zshrc $HOME/.zshrc
