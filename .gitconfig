@@ -1,12 +1,11 @@
 # https://github.com/yuanyan/gitter/blob/master/.gitconfig
 [alias]
-    #via http://stackoverflow.com/questions/5188320/how-can-i-get-a-list-of-git-branches-ordered-by-most-recent-commit
-    recent-branches = !git for-each-ref --count=5 --sort=-committerdate refs/heads/ --format='%(refname:short)'
     ci = commit
     amend = commit --amend            # ammend your last commit
     ammend = commit --amend           # ammend your last commit
     co = checkout
     cp = cherry-pick -x # grab a change from a branch
+    pushf = push --force-with-lease
 
     # log
     l = log --graph --date=short --decorate=full
@@ -21,8 +20,8 @@
 
     # status
     s = status -s                     # View the current working tree status using the short format
-    st = status                       # status
-    stat = status                     # status
+    st = status --untracked-files=no -s
+    stat = status
 
 [apply]
     # Detect whitespace errors when applying a patch
@@ -85,5 +84,12 @@
 [user]
     name = Michał Suszko
     email = michal.suszko@dry.pl
+    signingkey = 0F767D2865CAD3DD
 [push]
 	default = current
+[rerere]
+	enabled = 1
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
