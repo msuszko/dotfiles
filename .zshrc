@@ -4,7 +4,9 @@
 #
 # Environment variables
 
-case `uname` in
+osname=`uname -s`
+
+case $osname in
 'SunOS')
     PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/ccs/bin:/usr/ucb:/usr/local/bin:/usr/local/sbin
     MANPATH=/usr/share/man:/usr/local/man:/usr/local/share/man:/usr/sfw/share/man:/usr/sfw/esp/man:/usr/perl5/5.6.1/man:/usr/openwin/share/man:/usr/dt/share/man:/usr/j2se/man:/usr/java1.2/man
@@ -38,10 +40,12 @@ HISTSIZE=25000
 SAVEHIST=25000
 DIRSTACKSIZE=10
 
+setopt EXTENDEDHISTORY
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
 setopt HIST_REDUCE_BLANKS
 setopt INC_APPEND_HISTORY
+setopt INC_APPEND_HISTORY_TIME
 setopt AUTO_PUSHD
 setopt RMSTARSILENT
 setopt NOBEEP
@@ -88,7 +92,7 @@ bindkey -e
 bindkey "^U" vi-kill-line
 
 export GOPATH=$HOME/go
-export PATH=$HOME/env/bin:$GOPATH/bin:$HOME/.cargo/bin:$HOME/local/bin:$PATH:$HOME/.krew/bin
+export PATH=$HOME/env312/bin:$GOPATH/bin:$HOME/.cargo/bin:$HOME/local/bin:$PATH:$HOME/.krew/bin
 export FZF_DEFAULT_OPTS="--color=light"
 export XDG_CONFIG_HOME=$HOME/.config
 
@@ -114,3 +118,21 @@ complete -F __start_kubectl k
 complete -o nospace -C terraform terraform
 zstyle ':completion:*' menu select
 fpath+=~/.zfunc
+if [ -r "$HOME/.cargo/bin/rye" ]; then
+  source <("$HOME/.cargo/bin/rye" self completion -s zsh)
+fi
+
+if [ "$osname" = "Darwin" ]
+then
+pg_version=16
+export PATH="/opt/homebrew/opt/postgresql@${pg_version}/libexec/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/postgresql@${pg_version}/lib/postgresql@${pg_version}/"
+export CPPFLAGS="-I/opt/homebrew/opt/postgresql@${pg_version}/include/postgresql@${pg_version}/"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/postgresql@${pg_version}/lib/postgresql@${pg_version}/pkgconfig/"
+# rancher desktop
+export PATH="$PATH:$HOME/.rd/bin"
+fi
+
+
+
+export GITOLIZE_DIRECTORY="$HOME/tx/infra/gitolize"
