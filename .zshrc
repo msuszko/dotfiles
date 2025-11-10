@@ -79,8 +79,8 @@ esac
 
 export PROMPT='%F{blue}%m%f%# '
 export EDITOR='nvim'
-export LC_ALL="en_GB.UTF-8"
-export LANG="en_GB.UTF-8"
+export LC_ALL="C.UTF-8"
+export LANG="C.UTF-8"
 export LC_CTYPE="pl_PL.UTF-8"
 export RPROMPT="%~"
 export MAILDIR=${HOME}/Mail/inbox/
@@ -95,6 +95,7 @@ export GOPATH=$HOME/go
 export PATH=$HOME/env312/bin:$GOPATH/bin:$HOME/.cargo/bin:$HOME/local/bin:$PATH:$HOME/.krew/bin
 export FZF_DEFAULT_OPTS="--color=light"
 export XDG_CONFIG_HOME=$HOME/.config
+export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
 
 setopt AUTOLIST
 
