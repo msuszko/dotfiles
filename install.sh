@@ -19,6 +19,7 @@ ln -sf $dotfiles_dir/.config/nvim/init.vim $HOME/.config/nvim/init.vim
 ln -sf $dotfiles_dir/.config/starship.toml $HOME/.config/starship.toml
 ln -sf $dotfiles_dir/gpg.conf ${GNUPGHOME:-$HOME/.gnupg}/gpg.conf
 ln -sf $dotfiles_dir/.config/alacritty/alacritty.toml $HOME/.config/alacritty/alacritty.toml
+ln -sf $dotfiles_dir/.config/ghostty/config $HOME/.config/ghostty/config
 
 # Install vim-plug
 if [ ! -f ~/.vim/autoload/plug.vim ]
