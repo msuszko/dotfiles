@@ -4,7 +4,7 @@ import = ["~/.config/alacritty/themes/themes/papercolor_light.toml"]
 TERM = "alacritty"
 
 [font]
-size = 15.0
+size = 10.0
 
 [font.bold]
 family = "DejaVuSansM Nerd Font"
