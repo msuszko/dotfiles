@@ -96,7 +96,6 @@ set display=lastline
 " Auto indentation
 set autoindent
 set smartindent
-set pastetoggle=<F10>
 set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
 
 " Disable startup message
@@ -112,38 +111,32 @@ set conceallevel=2
 " packages {{{
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
-"Plug 'ludovicchabant/vim-lawrencium'
-Plug 'honza/vim-snippets'
+"Plug 'honza/vim-snippets'
 Plug 'sjbach/lusty'
 Plug 'sjl/gundo.vim'
-Plug 'fatih/vim-go'
+"Plug 'fatih/vim-go'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'vim-scripts/indentpython.vim'
-Plug 'w0rp/ale'
-Plug 'tenable/vim-nasl'
-Plug 'Olical/conjure'
-Plug 'tpope/vim-dispatch'
-"Plug 'clojure-vim/vim-jack-in'
+"Plug 'vim-scripts/indentpython.vim'
+"Plug 'w0rp/ale'
+"Plug 'tenable/vim-nasl'
+"Plug 'Olical/conjure'
+"Plug 'tpope/vim-dispatch'
 " Only in Neovim:
-Plug 'radenling/vim-dispatch-neovim'
-"Plug 'Rykka/riv.vim'
-Plug 'rking/ag.vim'
+"Plug 'radenling/vim-dispatch-neovim'
 Plug 'bling/vim-airline'
 Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/peaksea'
-Plug 'airblade/vim-gitgutter'
-Plug 'nvie/vim-flake8'
-Plug 'fisadev/vim-isort'
-"Plug 'sheerun/vim-polyglot'
+"Plug 'airblade/vim-gitgutter'
+"Plug 'nvie/vim-flake8'
+"Plug 'fisadev/vim-isort'
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'junegunn/seoul256.vim'
+"Plug 'junegunn/seoul256.vim'
 Plug 'jonathanfilip/vim-lucius'
-Plug 'editorconfig/editorconfig-vim'
-"Plug 'duganchen/vim-soy'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'github/copilot.vim'
-Plug 'grafana/vim-alloy'
+"Plug 'editorconfig/editorconfig-vim'
+Plug 'nvim-treesitter/nvim-treesitter', {'branch': 'main', 'do': ':TSUpdate'}
+"Plug 'github/copilot.vim'
+"Plug 'grafana/vim-alloy'
 call plug#end()
 " }}}
 
