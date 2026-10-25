@@ -52,31 +52,6 @@ setopt NOBEEP
 setopt AUTOCD
 
 
-b_esc=`print -Pn "\e]0;"`
-e_esc=`print -Pn "\a"`
-
-case "${TERM}" in
-screen)
-    export PROMPT="%{${b_esc}$WINDOW %n@%m:%/${e_esc}%}%m%# "
-    preexec () {
-        print -Pn "\e]0;$WINDOW %n@%m:%/: ";
-        print -RPn "%60>...>${(V)1//\%/%%}";
-        print -Pn "\a";
-    }
-    ;;
-xterm*|rxvt*)
-    export PROMPT="%{${b_esc}%n@%m:%/${e_esc}%}%m%# "
-    preexec () {
-        print -Pn "\e]0;%n@%m:%/: ";
-        print -RPn "%60>...>${(V)1//\%/%%}";
-        print -Pn "\a";
-    }
-    ;;
-*)
-   export PROMPT="%m%# "
-   ;;
-esac
-
 export PROMPT='%F{blue}%m%f%# '
 export EDITOR='nvim'
 export LC_ALL="C.UTF-8"
