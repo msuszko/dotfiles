@@ -4,7 +4,7 @@
 #
 # Environment variables
 
-osname=`uname -s`
+osname=$(uname -s)
 
 case $osname in
 'SunOS')
