@@ -2,10 +2,13 @@
 
 " General options{{{
 
-set nocompatible
-filetype plugin indent on
+" vim only: neovim is always nocompatible and utf-8
+if !has('nvim')
+  set nocompatible
+  set encoding=utf-8
+endif
 
-set encoding=utf-8
+filetype plugin indent on
 
 " Whitespaces and tabs
 set tabstop=8 softtabstop=2 shiftwidth=2 expandtab
@@ -90,7 +93,6 @@ set display=lastline
 
 " Auto indentation
 set autoindent
-set smartindent
 set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
 
 " Disable startup message

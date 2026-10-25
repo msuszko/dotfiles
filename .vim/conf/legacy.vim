@@ -1,14 +1,6 @@
 " vim: fdm=marker ts=2 sts=2 sw=2 fdl=0
 
-let g:gitgutter_enabled = 1
-let g:ale_sign_error = '☢'
-let g:ale_sign_warning = '☹'
-" highlight clear ALEErrorSign
-highlight clear ALEWarningSign
-let g:airline#extensions#ale#enabled = 1
-let g:airline_theme='papercolor'
-let g:ale_linters = {'python': ['flake8']}
-
+let g:airline_theme='lucius'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
@@ -17,12 +9,6 @@ if executable('ag')
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor\ --column
   set grepformat=%f:%l:%c:%m,%f:%l:%m
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
 endif
 
 nnoremap <leader>* :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
@@ -51,12 +37,9 @@ xnoremap Q gq
 nnoremap Q gqap
 
 set background=light
-set hidden
-
 
 " display
 set showmatch
-set showcmd       " display incomplete commands
 set visualbell    " don't beep
 set noerrorbells  " don't beep
 
@@ -88,7 +71,6 @@ set spellfile=~/.vim/spell.add
 map <leader>s :setlocal spell! spelllang=pl<CR>
 map <leader>S :setlocal spell! spelllang=en_US<CR>
 
-nmap <silent> <leader>n :NERDTreeToggle<CR>
 nmap <silent> <leader>g :GundoToggle<CR>
 nmap <silent> <leader>c :copen<CR>
 nmap <silent> <leader>C :cclose<CR>
@@ -96,17 +78,10 @@ nmap <silent> <leader>m :make<CR>
 nmap <silent> <leader>; :LustyJuggler<CR>
 
 
-set magic
 set nonumber
 set report=0
-set ruler
-set showmode
 set nostartofline
 set textwidth=78
-" set colorcolumn=78
-set ttyfast
-set visualbell
-set wildchar=<TAB>
 set wrapmargin=1
 set fileformat=unix
 set fileformats=unix,dos,mac
@@ -121,7 +96,6 @@ imap <F2> <C-O>:set nu!<CR>
 let nasl_space_errors = 1
 
 let html_no_rendering=1
-let g:closetag_default_xml=1
 
 augroup aug_filetypes
   autocmd!
@@ -137,7 +111,6 @@ augroup aug_filetypes
   autocmd BufNewFile,BufRead *.inc set indentexpr=
   autocmd FileType markdown setlocal spell
   autocmd FileType gitcommit setlocal spell
-  autocmd FileType html,mako let b:closetag_html_style=1
   autocmd FileType python source ~/.vim/scripts/python.vim
 augroup END
 
@@ -158,9 +131,6 @@ vnoremap < <gv
 
 inoremap <C-j> <C-o>J
 
-map <F8> :new<CR>:read !hg diff<CR>:set syntax=diff buftype=nofile<CR>gg
-map <F7> :new<CR>:read !svn diff<CR>:set syntax=diff buftype=nofile<CR>gg
-
 map <leader>tn :tabnew %<cr>
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove 
@@ -173,21 +143,10 @@ imap <C-S-tab> <ESC>:tabprevious<cr>i
 imap <C-tab> <ESC>:tabnext<cr>i
 
 " Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if has("gui_running")
-    source ~/.vim/scripts/gui.vim
-endif
-
 if &t_Co > 2 || has("gui_running")
-    set   t_Co=256
     syntax on
-    "let g:seoul256_light_background = 250
     colorscheme lucius
-endif
-if &term == "screen"
-  set t_Co=256
 endif
 
 cmap w!! w !sudo tee % >/dev/null
 
-filetype plugin indent on
