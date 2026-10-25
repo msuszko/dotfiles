@@ -67,7 +67,8 @@ export GOPATH=$HOME/go
 export PATH=$HOME/.local/bin:$GOPATH/bin:$HOME/.cargo/bin:$PATH:$HOME/.krew/bin
 export FZF_DEFAULT_OPTS="--color=light"
 export XDG_CONFIG_HOME=$HOME/.config
-export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
+: ${SSH_AUTH_SOCK:=$XDG_RUNTIME_DIR/ssh-agent.socket}
+export SSH_AUTH_SOCK
 
 setopt AUTOLIST
 
