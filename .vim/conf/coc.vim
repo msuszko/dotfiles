@@ -2,8 +2,6 @@
 
 " completion {{{
 
-let g:gundo_prefer_python3 = 1
-
 " CoC
 set updatetime=300
 

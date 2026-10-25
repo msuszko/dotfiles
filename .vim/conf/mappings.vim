@@ -57,7 +57,7 @@ nnoremap <silent> <leader>V :execute 'source' fnameescape(g:vimrc)<CR>:filetype 
 map <leader>s :setlocal spell! spelllang=pl<CR>
 map <leader>S :setlocal spell! spelllang=en_US<CR>
 
-nmap <silent> <leader>g :GundoToggle<CR>
+nmap <silent> <leader>g :UndotreeToggle<CR>
 nmap <silent> <leader>c :copen<CR>
 nmap <silent> <leader>C :cclose<CR>
 nmap <silent> <leader>m :make<CR>
