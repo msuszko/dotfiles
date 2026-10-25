@@ -52,12 +52,10 @@ setopt NOBEEP
 setopt AUTOCD
 
 
-export PROMPT='%F{blue}%m%f%# '
 export EDITOR='nvim'
 export LC_ALL="C.UTF-8"
 export LANG="C.UTF-8"
 export LC_CTYPE="pl_PL.UTF-8"
-export RPROMPT="%~"
 export MAILDIR=${HOME}/Mail/inbox/
 export MAIL=$MAILDIR
 export LESSCHARSET=utf-8
