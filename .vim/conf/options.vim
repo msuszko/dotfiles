@@ -95,6 +95,13 @@ set display=lastline
 set autoindent
 set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
 
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+set signcolumn=yes
+
+" Faster CursorHold events (symbol highlighting, swap file writes)
+set updatetime=300
+
 " Disable startup message
 set shortmess+=atI
 

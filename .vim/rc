@@ -2,6 +2,7 @@
 "
 " Entry point shared by vim (~/.vimrc) and neovim (via init.vim).
 " The actual configuration lives in conf/ next to this file.
+" LSP is neovim-only and lives in ~/.config/nvim (see .config/nvim/init.vim).
 
 if v:progname =~? "evim"
   finish
@@ -11,6 +12,6 @@ endif
 let g:vimrc = resolve(expand('<sfile>:p'))
 let s:conf = fnamemodify(g:vimrc, ':h') . '/conf/'
 
-for s:name in ['options', 'plugins', 'coc', 'ui', 'mappings', 'filetypes']
+for s:name in ['options', 'plugins', 'ui', 'mappings', 'filetypes']
   execute 'source ' . fnameescape(s:conf . s:name . '.vim')
 endfor
