@@ -12,7 +12,7 @@ case $osname in
     MANPATH=/usr/share/man:/usr/local/man:/usr/local/share/man:/usr/sfw/share/man:/usr/sfw/esp/man:/usr/perl5/5.6.1/man:/usr/openwin/share/man:/usr/dt/share/man:/usr/j2se/man:/usr/java1.2/man
     TERM=xtermc
     alias screen='TERM=screen screen'
-    SCREENDIR=$HOME/.screen
+    SCREENDIR="$HOME/.screen"
     export PATH MANPATH TERM SCREENDIR
     ;;
 'HP-UX')
@@ -28,14 +28,14 @@ case $osname in
 'Darwin')
     ulimit -n 2048
     alias mtr="sudo /usr/local/sbin/mtr"
-    test -e $HOME/.iterm2_shell_integration.zsh && source $HOME/.iterm2_shell_integration.zsh || true
+    test -e "$HOME/.iterm2_shell_integration.zsh" && source "$HOME/.iterm2_shell_integration.zsh" || true
     FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
     ;;
 *)
     ;;
 esac
 
-HISTFILE=${HOME}/.zsh_history
+HISTFILE="${HOME}/.zsh_history"
 HISTSIZE=25000
 SAVEHIST=25000
 DIRSTACKSIZE=10
@@ -62,10 +62,10 @@ bindkey -e
 bindkey "^U" backward-kill-line
 
 typeset -U path PATH
-export GOPATH=$HOME/go
-export PATH=$HOME/.local/bin:$GOPATH/bin:$HOME/.cargo/bin:$PATH:$HOME/.krew/bin
+export GOPATH="$HOME/go"
+export PATH="$HOME/.local/bin:$GOPATH/bin:$HOME/.cargo/bin:$PATH:$HOME/.krew/bin"
 export FZF_DEFAULT_OPTS="--color=light"
-export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CONFIG_HOME="$HOME/.config"
 : ${SSH_AUTH_SOCK:=$XDG_RUNTIME_DIR/ssh-agent.socket}
 export SSH_AUTH_SOCK
 
