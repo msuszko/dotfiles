@@ -55,8 +55,6 @@ export EDITOR='nvim'
 export LC_ALL="C.UTF-8"
 export LANG="C.UTF-8"
 export LC_CTYPE="pl_PL.UTF-8"
-export MAILDIR=${HOME}/Mail/inbox/
-export MAIL=$MAILDIR
 export LESSCHARSET=utf-8
 export PAGER=less
 
