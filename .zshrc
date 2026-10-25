@@ -61,7 +61,7 @@ export LESSCHARSET=utf-8
 export PAGER=less
 
 bindkey -e
-bindkey "^U" vi-kill-line
+bindkey "^U" backward-kill-line
 
 export GOPATH=$HOME/go
 export PATH=$HOME/.local/bin:$GOPATH/bin:$HOME/.cargo/bin:$PATH:$HOME/.krew/bin
