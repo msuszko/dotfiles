@@ -4,14 +4,15 @@ let g:airline_theme='lucius'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
-" The Silver Searcher
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor\ --column
-  set grepformat=%f:%l:%c:%m,%f:%l:%m
+" ripgrep: respects .gitignore, fast enough to use for :grep
+if executable('rg')
+  set grepprg=rg\ --vimgrep\ --smart-case
+  set grepformat=%f:%l:%c:%m
 endif
 
-nnoremap <leader>* :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+" :Rg {pattern} [path...] searches and opens the quickfix window
+command! -nargs=+ -complete=file Rg grep! <args> | cwindow
+nnoremap <leader>* :grep! -w -- <C-R><C-W><CR>:cwindow<CR>
 
 
 set nobackup
