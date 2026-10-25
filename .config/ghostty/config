@@ -8,3 +8,5 @@ copy-on-select = clipboard
 # strip trailing spaces when copying; confirm-free multi-line paste
 clipboard-trim-trailing-spaces = true
 clipboard-paste-protection = false
+# Shift+Insert pastes the same clipboard as Ctrl+Shift+V
+keybind = shift+insert=paste_from_clipboard
