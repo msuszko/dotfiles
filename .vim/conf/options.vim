@@ -98,14 +98,19 @@ set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
 " Disable startup message
 set shortmess+=atI
 
-" Conceal text and highlight with "Conceal" highlight group
-set conceallevel=2
-
 " }}}
 
 " Files, history and search {{{
 
 set nobackup
+
+" Persistent undo
+set undofile
+if !has('nvim')
+  " neovim already keeps undo files in its state dir
+  set undodir=~/.vim/undo
+  silent! call mkdir(&undodir, 'p', 0700)
+endif
 set history=1000
 set undolevels=1000      " use many muchos levels of undo
 if has('nvim')
@@ -132,6 +137,12 @@ set hlsearch      " highlight search terms
 set ignorecase    " ignore case when searching
 set smartcase     " if searching and search contains upper case, make case sensitive search
 
+if has('nvim')
+  set termguicolors
+  " Live preview of :substitute in a split
+  set inccommand=split
+endif
+
 " spelling
 set spellfile=~/.vim/spell.add
 
@@ -145,8 +156,8 @@ set noerrorbells  " don't beep
 set nonumber
 set report=0
 set nostartofline
-set textwidth=78
-set wrapmargin=1
+set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:.
+set splitright splitbelow
 
 " }}}

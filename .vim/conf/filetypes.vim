@@ -8,9 +8,9 @@ let nasl_space_errors = 1
 
 augroup aug_filetypes
   autocmd!
-  autocmd FileType text setlocal textwidth=78
+  autocmd FileType text,markdown,gitcommit setlocal textwidth=78
   autocmd FileType xml setlocal noexpandtab tabstop=2
-  autocmd BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
+  autocmd FileType go setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
   autocmd BufNewFile,BufRead *.xhtml setf xhtml
   autocmd BufNewFile,BufRead *.mako setf mako
   autocmd BufNewFile,BufRead *.jinja setf jinja

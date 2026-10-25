@@ -2,22 +2,22 @@
 map <buffer> <leader><space> :w!<cr>:!python %<cr>
 
 "Set some bindings up for 'compile' of python
-set makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
-set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+setlocal makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
+setlocal efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 
 "setlocal omnifunc=RopeCompleteFunc
 
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set textwidth=79
-set expandtab
-set autoindent
-set fileformat=unix
+setlocal tabstop=4
+setlocal softtabstop=4
+setlocal shiftwidth=4
+setlocal textwidth=79
+setlocal expandtab
+setlocal autoindent
+setlocal fileformat=unix
 
 
 "Python iMaps
-set cindent
+setlocal cindent
 inoremap <buffer> $r return
 inoremap <buffer> $s self
 inoremap <buffer> $c ##<cr>#<space><cr>#<esc>kla
@@ -33,4 +33,4 @@ function! Python_Eval_VSplit() range
   execute ":!python " . src . " > " . dst
   execute ":pedit! " . dst
 endfunction
-vmap <F7> :call Python_Eval_VSplit()<cr>
+vmap <buffer> <F7> :call Python_Eval_VSplit()<cr>
