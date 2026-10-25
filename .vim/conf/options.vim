@@ -102,3 +102,51 @@ set shortmess+=atI
 set conceallevel=2
 
 " }}}
+
+" Files, history and search {{{
+
+set nobackup
+set history=1000
+set undolevels=1000      " use many muchos levels of undo
+if has('nvim')
+  set viminfo=%,'500,\"1000,:1000,n~/.vim/nviminfo
+else
+  set viminfo=%,'500,\"1000,:1000,n~/.vim/viminfo
+endif
+set suffixes=.aux,.bak,.dvi,.gz,.idx,.log,.ps,.swp,.tar
+set wildignore=*.swp,*.bak,*.pyc,*.class
+
+set fileformat=unix
+set fileformats=unix,dos,mac
+set fileencodings=ucs-bom,utf-8,cp1250,iso8859-2
+
+" ripgrep: respects .gitignore, fast enough to use for :grep
+if executable('rg')
+  set grepprg=rg\ --vimgrep\ --smart-case
+  set grepformat=%f:%l:%c:%m
+endif
+
+" search
+set incsearch	  " do incremental searching
+set hlsearch      " highlight search terms
+set ignorecase    " ignore case when searching
+set smartcase     " if searching and search contains upper case, make case sensitive search
+
+" spelling
+set spellfile=~/.vim/spell.add
+
+" }}}
+
+" Display {{{
+
+set showmatch
+set visualbell    " don't beep
+set noerrorbells  " don't beep
+set nonumber
+set report=0
+set nostartofline
+set textwidth=78
+set wrapmargin=1
+set listchars=tab:>.,trail:.,extends:#,nbsp:.
+
+" }}}
