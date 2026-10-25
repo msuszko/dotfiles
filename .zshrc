@@ -83,7 +83,7 @@ export VAULT_CLI_NO_COLOR=1
 
 source <("starship" init zsh --print-full-init)
 # Completion
-fpath=( ${HOME}/.zfunc "${fpath[@]}" )
+fpath=( "${HOME}/.zfunc" "${fpath[@]}" )
 autoload -Uz compinit
 autoload -U +X bashcompinit
 compinit
@@ -91,10 +91,6 @@ bashcompinit
 complete -F __start_kubectl k
 complete -o nospace -C terraform terraform
 zstyle ':completion:*' menu select
-fpath+=~/.zfunc
-if [ -r "$HOME/.cargo/bin/rye" ]; then
-  source <("$HOME/.cargo/bin/rye" self completion -s zsh)
-fi
 
 if [ "$osname" = "Darwin" ]
 then
