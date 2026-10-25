@@ -80,6 +80,7 @@ alias vi=nvim
 alias vim=nvim
 
 export VAULT_CLI_NO_COLOR=1
+export GITOLIZE_DIRECTORY="$HOME/tx/infra/gitolize"
 
 source <("starship" init zsh --print-full-init)
 # Completion
@@ -105,5 +106,4 @@ fi
 
 
 
-export GITOLIZE_DIRECTORY="$HOME/tx/infra/gitolize"
 eval "$(mise activate zsh)"
