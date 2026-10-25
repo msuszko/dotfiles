@@ -8,7 +8,8 @@ if v:progname =~? "evim"
 endif
 
 " ~/.vimrc is a symlink to this file, so resolve it to find conf/
-let s:conf = fnamemodify(resolve(expand('<sfile>:p')), ':h') . '/conf/'
+let g:vimrc = resolve(expand('<sfile>:p'))
+let s:conf = fnamemodify(g:vimrc, ':h') . '/conf/'
 
 for s:name in ['options', 'plugins', 'coc', 'legacy']
   execute 'source ' . fnameescape(s:conf . s:name . '.vim')

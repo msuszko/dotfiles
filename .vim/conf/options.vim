@@ -21,7 +21,6 @@ set hidden
 " Don't wait to much for keycodes send by terminal, so there's no delay on <ESC>
 set notimeout
 set ttimeout
-set timeoutlen=2000
 set ttimeoutlen=30
 
 " Zsh like <Tab> completion in command mode
@@ -60,7 +59,7 @@ augroup aug_cursor_line
   au InsertLeave * setlocal cursorline
 augroup END
 
-" Disable reading vim variables & options from special comments within file header or footer
+" Read vim options from a modeline in the first or last line of a file only
 set modeline
 set modelines=1
 
@@ -95,7 +94,7 @@ set smartindent
 set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
 
 " Disable startup message
-set shortmess+=I
+set shortmess+=atI
 
 " Conceal text and highlight with "Conceal" highlight group
 set conceallevel=2
