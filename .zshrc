@@ -63,6 +63,7 @@ export PAGER=less
 bindkey -e
 bindkey "^U" backward-kill-line
 
+typeset -U path PATH
 export GOPATH=$HOME/go
 export PATH=$HOME/.local/bin:$GOPATH/bin:$HOME/.cargo/bin:$PATH:$HOME/.krew/bin
 export FZF_DEFAULT_OPTS="--color=light"
