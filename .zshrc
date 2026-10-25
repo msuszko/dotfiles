@@ -92,7 +92,7 @@ bindkey -e
 bindkey "^U" vi-kill-line
 
 export GOPATH=$HOME/go
-export PATH=$HOME/env312/bin:$GOPATH/bin:$HOME/.cargo/bin:$HOME/local/bin:$PATH:$HOME/.krew/bin
+export PATH=$HOME/.local/bin:$GOPATH/bin:$HOME/.cargo/bin:$PATH:$HOME/.krew/bin
 export FZF_DEFAULT_OPTS="--color=light"
 export XDG_CONFIG_HOME=$HOME/.config
 export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
@@ -109,8 +109,9 @@ alias vim=nvim
 
 export VAULT_CLI_NO_COLOR=1
 
-source <("$HOME/.cargo/bin/starship" init zsh --print-full-init)
+source <("starship" init zsh --print-full-init)
 # Completion
+fpath=( ${HOME}/.zfunc "${fpath[@]}" )
 autoload -Uz compinit
 autoload -U +X bashcompinit
 compinit
@@ -137,3 +138,4 @@ fi
 
 
 export GITOLIZE_DIRECTORY="$HOME/tx/infra/gitolize"
+eval "$(mise activate zsh)"
