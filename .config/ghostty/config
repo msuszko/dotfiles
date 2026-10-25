@@ -1,1 +1,10 @@
 theme = iTerm2 Tango Light
+
+# clipboard: allow tmux (OSC 52) to write/read the system clipboard
+clipboard-read = allow
+clipboard-write = allow
+# copy on select to both selection and system clipboard
+copy-on-select = clipboard
+# strip trailing spaces when copying; confirm-free multi-line paste
+clipboard-trim-trailing-spaces = true
+clipboard-paste-protection = false
