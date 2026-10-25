@@ -96,18 +96,27 @@ local function has_text_before_cursor()
   return col > 0 and vim.fn.getline('.'):sub(col, col):match('%s') == nil
 end
 
-vim.keymap.set('i', '<Tab>', function()
+-- <Tab>/<S-Tab> also jump between snippet placeholders (neovim's own default
+-- mapping, which these would otherwise shadow).
+vim.keymap.set({ 'i', 's' }, '<Tab>', function()
   if vim.fn.pumvisible() == 1 then
     return '<C-n>'
+  elseif vim.snippet.active({ direction = 1 }) then
+    return '<Cmd>lua vim.snippet.jump(1)<CR>'
   elseif has_text_before_cursor() then
     return '<C-x><C-o>'
   end
   return '<Tab>'
-end, { expr = true, desc = 'Next completion / trigger completion' })
+end, { expr = true, desc = 'Next completion / snippet placeholder / trigger completion' })
 
-vim.keymap.set('i', '<S-Tab>', function()
-  return vim.fn.pumvisible() == 1 and '<C-p>' or '<S-Tab>'
-end, { expr = true, desc = 'Previous completion' })
+vim.keymap.set({ 'i', 's' }, '<S-Tab>', function()
+  if vim.fn.pumvisible() == 1 then
+    return '<C-p>'
+  elseif vim.snippet.active({ direction = -1 }) then
+    return '<Cmd>lua vim.snippet.jump(-1)<CR>'
+  end
+  return '<S-Tab>'
+end, { expr = true, desc = 'Previous completion / snippet placeholder' })
 
 vim.keymap.set('i', '<CR>', function()
   return pum_selected() and '<C-y>' or '<CR>'
