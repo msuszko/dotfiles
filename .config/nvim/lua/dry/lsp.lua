@@ -149,6 +149,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('n', ']g', function() vim.diagnostic.jump({ count = 1, float = true }) end, 'Next diagnostic')
 
     if client and client:supports_method('textDocument/completion') then
+      -- Servers only list punctuation as trigger characters; add the word
+      -- characters too so the popup shows up while typing, not just after "."
+      local provider = client.server_capabilities.completionProvider
+      local triggers = vim.list_extend({}, provider.triggerCharacters or {})
+      vim.list_extend(triggers, vim.split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_#', ''))
+      provider.triggerCharacters = triggers
       vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
     end
 

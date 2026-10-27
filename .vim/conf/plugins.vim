@@ -3,6 +3,7 @@
 " packages {{{
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
+Plug 'rafamadriz/friendly-snippets'
 Plug 'sjbach/lusty'
 Plug 'mbbill/undotree'
 Plug 'vim-airline/vim-airline'
