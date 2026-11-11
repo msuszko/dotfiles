@@ -61,7 +61,7 @@ nmap <silent> <leader>g :UndotreeToggle<CR>
 nmap <silent> <leader>c :copen<CR>
 nmap <silent> <leader>C :cclose<CR>
 nmap <silent> <leader>m :make<CR>
-nmap <silent> <leader>; :LustyJuggler<CR>
+nmap <silent> <leader>; :Telescope buffers<CR>
 
 " }}}
 
